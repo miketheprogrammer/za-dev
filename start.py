@@ -1,27 +1,32 @@
 import tornado.ioloop
 import tornado.web
-import pymongo
+import models
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("Hello, world")
 
-class FindZaHandler(tornado.web.RequestHandler):
-
+class UserHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def get(self):
-        conn = pymongo.Connection('localhost', 27017)
-        db = conn.za
+        x = models.User(username=self.request.arguments.get('username')[0])
+        if x._id is None:
+            x.save()
+            print x.fields
 
-        results = db.za.find()
-        print results
-        print results[0]
-        for result in results:
-            print result
-            self.write(result['username'])
-        self.finish()
+class UserCreationHandler(tornado.web.RequestHandler):
+    @tornado.web.asynchronous
+    def get(self):
+        arguments = self.request.arguments.copy()
+        if not 'username' in arguments:
+            self.write("404 Error: Page or Resource Not Found")
+        else:
+            za = models.BaseModel('za')
+            za.find('')
+
 application = tornado.web.Application([
     (r"/", MainHandler),
-    (r"/get/za", FindZaHandler),
+    (r"/get/za", UserHandler),
+    (r"/user/create", UserCreationHandler)
 ])
 
 
