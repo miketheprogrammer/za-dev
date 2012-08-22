@@ -16,7 +16,7 @@ class FindZaHandler(tornado.web.RequestHandler):
 
 application = tornado.web.Application([
     (r"/", MainHandler),
-    (r"/get/za", async_mongo_test.FindZaHandler),
+    (r"/get/za", FindZaHandler),
 ])
 
 
