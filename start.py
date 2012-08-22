@@ -12,8 +12,13 @@ class FindZaHandler(tornado.web.RequestHandler):
         conn = pymongo.Connection('localhost', 27017)
         db = conn.za
 
-        print db.za.find()
-
+        results = db.za.find()
+        print results
+        print results[0]
+        for result in results:
+            print result
+            self.write(result['username'])
+        self.finish()
 application = tornado.web.Application([
     (r"/", MainHandler),
     (r"/get/za", FindZaHandler),
