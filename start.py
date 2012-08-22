@@ -1,6 +1,6 @@
 import tornado.ioloop
 import tornado.web
-import async_mongo_test
+import pymongo
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("Hello, world")
