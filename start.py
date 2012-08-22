@@ -1,13 +1,13 @@
 import tornado.ioloop
 import tornado.web
-from handlers.async_mongo_test import *
+import async_mongo_test
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("Hello, world")
 
 application = tornado.web.Application([
     (r"/", MainHandler),
-    (r"/asynctest", AsyncTestHandler),
+    (r"/asynctest", async_mongo_test.AsyncTestHandler),
 ])
 
 if __name__ == "__main__":

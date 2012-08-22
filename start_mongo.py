@@ -8,7 +8,7 @@ class Handler(tornado.web.RequestHandler):
         db = asyncmongo.Client(pool_id='mypool', host='localhost', 
             port=27107, dbname='za')
 
-        db.users.find(callback=self._on_response)
+        db.za.find(callback=self._on_response)
 
     def _on_response(self, response, error):
         if error:
