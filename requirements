@@ -1,0 +1,2 @@
+pymongo
+git+git://github.com/pusher/pusher_client_python.git
